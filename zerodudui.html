@@ -1,0 +1,147 @@
+
+ <!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zero Dudui</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ffd6e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh; /* important pentru telefon */
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+
+h1 {
+    font-size: clamp(26px, 7vw, 48px);
+    font-weight: bold;
+    color: #c2185b;
+    line-height: 1.2;
+}
+
+.buttons {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 14px 35px;
+    font-size: clamp(16px, 4vw, 20px);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#da {
+    background: #ff4da6;
+    color: white;
+}
+
+#nu {
+    background: white;
+    color: #c2185b;
+}
+
+.heart {
+    position: fixed;
+    bottom: -10px;
+    color: #ff2e88;
+    animation: float 4s linear forwards;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+
+#finalMessage {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(24px, 8vw, 40px);
+    font-weight: bold;
+    color: #c2185b;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="mainContent">
+    <h1>vrei sa fii duduia mea primavara asta?</h1>
+    <div class="buttons">
+        <button id="da">DA</button>
+        <button id="nu">NU</button>
+    </div>
+</div>
+
+<div id="finalMessage">da mi un mil pana maine</div>
+
+<script>
+let daBtn = document.getElementById("da");
+let nuBtn = document.getElementById("nu");
+let daSize = 1;
+let nuSize = 1;
+
+nuBtn.addEventListener("click", function() {
+    nuSize -= 0.15;
+    daSize += 0.15;
+
+    if (nuSize <= 0.2) {
+        nuSize = 0.2;
+    }
+
+    nuBtn.style.transform = "scale(" + nuSize + ")";
+    daBtn.style.transform = "scale(" + daSize + ")";
+});
+
+daBtn.addEventListener("click", function() {
+    document.getElementById("mainContent").style.display = "none";
+    
+    let final = document.getElementById("finalMessage");
+    final.style.display = "flex";
+
+    for (let i = 0; i < 120; i++) {
+        let heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 30 + 20) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(heart);
+    }
+});
+</script>
+
+</body>
+</html>
